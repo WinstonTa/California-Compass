@@ -42,6 +42,46 @@ export const places: Place[] = [
     stats: [{ label: "Known for", value: "Coast + biotech" }, { label: "Climate", value: "Mediterranean" }]
   },
   {
+    id: "santa-barbara",
+    name: "Santa Barbara",
+    category: "city",
+    coordinates: [-119.6982, 34.4208],
+    region: "Central Coast",
+    summary: "A Spanish-influenced coastal city backed by the Santa Ynez Mountains.",
+    description: "Santa Barbara pairs red-tile architecture and palm-lined beaches with a relaxed gateway to the central coast.",
+    stats: [{ label: "Known for", value: "Architecture + coast" }, { label: "Region", value: "Central Coast" }]
+  },
+  {
+    id: "burbank",
+    name: "Burbank",
+    category: "city",
+    coordinates: [-118.3089, 34.1808],
+    region: "Los Angeles County",
+    summary: "A foothill city with deep roots in California's film and television industry.",
+    description: "Burbank sits between the Verdugo Mountains and Los Angeles, home to major studios and a distinctly creative identity.",
+    stats: [{ label: "Known for", value: "Film + television" }, { label: "Setting", value: "Verdugo foothills" }]
+  },
+  {
+    id: "pasadena",
+    name: "Pasadena",
+    category: "city",
+    coordinates: [-118.1445, 34.1478],
+    region: "Los Angeles County",
+    summary: "A tree-lined foothill city where art, science, and historic neighborhoods meet.",
+    description: "Pasadena brings together grand civic spaces, independent culture, and a front-row view of the San Gabriel Mountains.",
+    stats: [{ label: "Known for", value: "Arts + science" }, { label: "Landmark", value: "Rose Bowl" }]
+  },
+  {
+    id: "irvine",
+    name: "Irvine",
+    category: "city",
+    coordinates: [-117.8265, 33.6846],
+    region: "Orange County",
+    summary: "A planned city of parks, trails, research, and Southern California growth.",
+    description: "Irvine's carefully connected neighborhoods and open spaces make it a distinctive lens on contemporary Orange County.",
+    stats: [{ label: "Known for", value: "Parks + research" }, { label: "County", value: "Orange" }]
+  },
+  {
     id: "yosemite",
     name: "Yosemite Valley",
     category: "landmark",
