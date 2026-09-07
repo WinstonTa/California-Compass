@@ -101,11 +101,6 @@ export default function Home() {
       </header>
       {isExploring ? (
         <>
-          <section className="hero-copy" aria-labelledby="hero-title">
-            <div className="eyebrow">The western edge / 36° 46′ N</div>
-            <h1 id="hero-title">Find your<br /><em>north star.</em></h1>
-            <p>Explore the places, landscapes, and stories that make California impossible to hold still.</p>
-          </section>
           <section className="facts-panel" aria-label="California facts">
             <div className="eyebrow">California / at a glance</div>
             {stateFacts.map((fact) => <div className="fact-row" key={fact.label}><span>{fact.label}</span><strong>{fact.value}</strong></div>)}
