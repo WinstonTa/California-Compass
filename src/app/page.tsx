@@ -19,6 +19,7 @@ const featuredRoute: Place[] = [
 
 export default function Home() {
   const mapRef = useRef<MapRef>(null);
+  const [isExploring, setIsExploring] = useState(false);
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
   const [tourIndex, setTourIndex] = useState<number | null>(null);
   const [activeCategories, setActiveCategories] = useState<Record<PlaceCategory, boolean>>({
@@ -80,10 +81,14 @@ export default function Home() {
 
   return (
     <main className="compass-app">
-      <div className="map-layer">
-        <CaliforniaMap ref={mapRef} places={visiblePlaces} selectedPlaceId={selectedPlace?.id ?? null} onSelect={selectPlace} />
-      </div>
-      <div className="map-vignette" />
+      {isExploring && (
+        <>
+          <div className="map-layer">
+            <CaliforniaMap ref={mapRef} places={visiblePlaces} selectedPlaceId={selectedPlace?.id ?? null} onSelect={selectPlace} />
+          </div>
+          <div className="map-vignette" />
+        </>
+      )}
       <header className="topbar">
         <div className="brand-lockup">
           <div className="brand-mark" aria-hidden="true">✦</div>
@@ -94,23 +99,44 @@ export default function Home() {
         </div>
         <div className="topbar-status"><span className="status-dot" /> Live atlas · 01</div>
       </header>
-      <section className="hero-copy" aria-labelledby="hero-title">
-        <div className="eyebrow">The western edge / 36° 46′ N</div>
-        <h1 id="hero-title">Find your<br /><em>north star.</em></h1>
-        <p>Explore the places, landscapes, and stories that make California impossible to hold still.</p>
-      </section>
-      <section className="facts-panel" aria-label="California facts">
-        <div className="eyebrow">California / at a glance</div>
-        {stateFacts.map((fact) => <div className="fact-row" key={fact.label}><span>{fact.label}</span><strong>{fact.value}</strong></div>)}
-      </section>
-      <SearchPanel places={places} selectedPlaceId={selectedPlace?.id ?? null} onSelect={selectPlace} />
-      <LayerControls activeCategories={activeCategories} onToggle={toggleCategory} />
-      <button type="button" className="feature-tour" onClick={startFeaturedRoute}>
-        {tourIndex === null ? "Featured route" : "Touring..."}
-      </button>
-      <button type="button" className="reset-view" onClick={resetView}><span>◎</span> Recenter compass</button>
-      <div className="map-credit">Map data © OpenStreetMap contributors</div>
-      <PlaceDrawer place={selectedPlace} onClose={() => setSelectedPlace(null)} />
+      {isExploring ? (
+        <>
+          <section className="hero-copy" aria-labelledby="hero-title">
+            <div className="eyebrow">The western edge / 36° 46′ N</div>
+            <h1 id="hero-title">Find your<br /><em>north star.</em></h1>
+            <p>Explore the places, landscapes, and stories that make California impossible to hold still.</p>
+          </section>
+          <section className="facts-panel" aria-label="California facts">
+            <div className="eyebrow">California / at a glance</div>
+            {stateFacts.map((fact) => <div className="fact-row" key={fact.label}><span>{fact.label}</span><strong>{fact.value}</strong></div>)}
+          </section>
+          <SearchPanel places={places} selectedPlaceId={selectedPlace?.id ?? null} onSelect={selectPlace} />
+          <LayerControls activeCategories={activeCategories} onToggle={toggleCategory} />
+          <button type="button" className="feature-tour" onClick={startFeaturedRoute}>
+            {tourIndex === null ? "Featured route" : "Touring..."}
+          </button>
+          <button type="button" className="reset-view" onClick={resetView}><span>◎</span> Recenter compass</button>
+          <div className="map-credit">Map data © OpenStreetMap contributors</div>
+          <PlaceDrawer place={selectedPlace} onClose={() => setSelectedPlace(null)} />
+        </>
+      ) : (
+        <section className="landing-hero" aria-labelledby="landing-title">
+          <div className="landing-hero__glow landing-hero__glow--left" />
+          <div className="landing-hero__glow landing-hero__glow--right" />
+          <div className="eyebrow">The western edge / 36° 46′ N</div>
+          <h1 id="landing-title">Find your<br /><em>north star.</em></h1>
+          <p className="landing-hero__subtitle">Explore the places, landscapes, and stories that make California impossible to hold still.</p>
+          <div className="landing-features" aria-label="California Compass features">
+            <span><b>01</b> Curated places</span>
+            <span><b>02</b> Living landscapes</span>
+            <span><b>03</b> Your next horizon</span>
+          </div>
+          <button type="button" className="explore-button" onClick={() => setIsExploring(true)}>
+            Explore Map <span aria-hidden="true">↗</span>
+          </button>
+          <div className="landing-coordinate">Pacific / California / 2024</div>
+        </section>
+      )}
     </main>
   );
 }
